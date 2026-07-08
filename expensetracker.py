@@ -1,5 +1,7 @@
 import json
 
+running_total = 0
+
 try:
     with open("expenses.json", "r") as file:
         expenses = json.load(file)
@@ -11,6 +13,7 @@ while True:
         print("2. View Expenses")
         print("3. Exit")
         print("4. Delete Expense")
+        print("5. Total Spending")
         inputnumber = int(input("Enter a number:"))
         
         if inputnumber == 1:
@@ -39,6 +42,12 @@ while True:
             print("Expense deleted")
             with open ("expenses.json", "w")as file:
                 json.dump(expenses, file)
+        elif inputnumber ==5:
+            for item in expenses:
+                running_total = running_total + item["Amount"]
+                
+            print(" The total is :", running_total)
+
             
         else:
             print("Invalid option, try again:")
